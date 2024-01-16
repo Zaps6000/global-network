@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+    <title>Server Status</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: rgba(0, 0, 0, 0.884);
+            color: white;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        footer {
+            background-color: #343a40; 
+            padding: 20px 0;
+            color: white;
+            margin-top: auto; 
+        }
+
+        footer p {
+            margin: 0; 
+        }
+
+        .made-with-heart {
+            text-align: center;
+        }
+
+        .server-info {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Server Status</h1>
+    </header>
+
+    <div class="server-info">
+        <a style="margin-left: 50%;" class="btn btn-primary" href="./index.html">Go Home</a>
+
+        <h2>Server Name: Red Valley Freeroam</h2>
+        <p>Status: <span id="status1">Loading...</span></p>
+        <p>Players Online: <span id="players1">Loading...</span></p>
+        <p>Max Players: <span id="maxPlayers1">Loading...</span></p>
+    
+        <!-- Server 2 -->
+        <h2>Server Name: Southside RP</h2>
+        <p>Status: <span id="status2">Loading...</span></p>
+        <p>Players Online: <span id="players2">Loading...</span></p>
+        <p>Max Players: <span id="maxPlayers2">Loading...</span></p>
+    </div>
+    
+    </main>
+
+    <footer>
+        <div class="made-with-heart">
+            <p>Made with ❤ by Zaps</p>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const serverConfig = [
+            {
+                name: 'Red Valley Freeroam',
+                apiUrl: 'https://servers-frontend.fivem.net/api/servers/single/eyaddm',
+                statusElement: 'status1',
+                playersElement: 'players1',
+                maxPlayersElement: 'maxPlayers1'
+            },
+            {
+                name: 'Southside RP',
+                apiUrl: 'https://servers-frontend.fivem.net/api/servers/single/56da57',//
+                statusElement: 'status2',
+                playersElement: 'players2',
+                maxPlayersElement: 'maxPlayers2'
+            }
+        ];
+    
+        function fetchServerStatus(server) {
+            fetch(server.apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // Update status, current players, and max players information
+                    document.getElementById(server.statusElement).innerText = "Online 🟢";
+                    document.getElementById(server.playersElement).innerText = data.Data.clients;
+                    document.getElementById(server.maxPlayersElement).innerText = data.Data.sv_maxclients;
+                })
+                .catch(error => console.error(`Error fetching ${server.name} server status:`, error));
+        }
+    
+        function fetchAllServerStatus() {
+            serverConfig.forEach(server => {
+                fetchServerStatus(server);
+            });
+        }
+    
+        fetchAllServerStatus();
+    
+        setInterval(fetchAllServerStatus, 60000); // Update every 1 minute
+    </script>
+</body>
+</html>
