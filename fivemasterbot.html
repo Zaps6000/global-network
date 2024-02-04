@@ -175,17 +175,19 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
     <script>
-    function updateServerCount() {
-        fetch('https://172.83.152.143:3003/guildCount')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('server-count').textContent = `Bot is in ${data.serverCount} servers.`;
-            })
-            .catch(error => {
-                console.error('Error fetching server count:', error);
-            });
-    }
-    window.onload = updateServerCount;
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('http://172.83.152.143:3003/guildCount') 
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('stats').innerHTML = `
+        <h2>Statistics</h2>
+        <p>Bot is in ${data.serverCount} servers.</p>
+      `;
+    })
+    .catch(error => {
+      console.error('Error fetching server count:', error);
+    });
+});
 </script>
 
 </html>
