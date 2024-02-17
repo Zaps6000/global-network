@@ -62,17 +62,19 @@
 
     <div class="server-info">
         <a style="margin-left: 50%;" class="btn btn-primary" href="./index.html">Go Home</a>
+<h2> SERVERS DOWN FOREVER </h2>
+       <!--
+<h2>Server Name: Red Valley Freeroam</h2>
+<p>Status: <span id="status1">Loading...</span></p>
+<p>Players Online: <span id="players1">Loading...</span></p>
+<p>Max Players: <span id="maxPlayers1">Loading...</span></p>
 
-        <h2>Server Name: Red Valley Freeroam</h2>
-        <p>Status: <span id="status1">Loading...</span></p>
-        <p>Players Online: <span id="players1">Loading...</span></p>
-        <p>Max Players: <span id="maxPlayers1">Loading...</span></p>
-    
-        <!-- Server 2 -->
-        <h2>Server Name: Southside RP</h2>
-        <p>Status: <span id="status2">Loading...</span></p>
-        <p>Players Online: <span id="players2">Loading...</span></p>
-        <p>Max Players: <span id="maxPlayers2">Loading...</span></p>
+<h2>Server Name: Southside RP</h2>
+<p>Status: <span id="status2">Loading...</span></p>
+<p>Players Online: <span id="players2">Loading...</span></p>
+<p>Max Players: <span id="maxPlayers2">Loading...</span></p>
+-->
+
     </div>
     
     </main>
@@ -108,7 +110,6 @@
             fetch(server.apiUrl)
                 .then(response => response.json())
                 .then(data => {
-                    // Update status, current players, and max players information
                     document.getElementById(server.statusElement).innerText = "Online 🟢";
                     document.getElementById(server.playersElement).innerText = data.Data.clients;
                     document.getElementById(server.maxPlayersElement).innerText = data.Data.sv_maxclients;
